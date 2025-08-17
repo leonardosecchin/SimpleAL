@@ -10,7 +10,6 @@ LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 NLPModels = "a4795742-8479-5a88-8948-cc11e1c8c1a6"
 Printf = "de0858da-6303-5e67-8744-51eddeeeb8d7"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [compat]
 AmplNLReader = "0.12.0"
@@ -19,4 +18,3 @@ LinearAlgebra = "1.11.0"
 NLPModels = "0.21.5"
 Printf = "1.11.0"
 SparseArrays = "1.10.0"
-Test = "1.11.0"
