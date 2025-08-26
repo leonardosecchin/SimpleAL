@@ -83,3 +83,15 @@ output = al(mpcc, extra_par=par)
 ```
 
 For more details, run `?al` and `?std_extra_par`.
+
+
+## Funding
+
+This research was supported by the São Paulo Research Foundation (FAPESP) (grant 2024/12967-8) and the National Council for Scientific and Technological Development (CNPq) (grant 302520/2025-2), Brazil.
+
+
+## How to cite
+
+If you use this code in your publications, please cite us. For now, you can cite the preprint:
+
+[*Andreani, Rosa, Secchin. On the boundedness of multipliers in augmented Lagrangian methods for mathematical programs with complementarity constraints (submitted). 2025*](https://optimization-online.org/?p=31446)
