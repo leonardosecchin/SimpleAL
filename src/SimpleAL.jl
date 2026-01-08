@@ -95,8 +95,8 @@ function initialize(nlp, extra_par::EXTRA_PAR, x0)
         # nlp.meta.n_cc is the number of complementary pairs.
 
         ncc = nlp.meta.n_cc
-        @inbounds if ncc > 0
-            for j in 1:m
+        if ncc > 0
+            @inbounds for j in 1:m
                 if nlp.meta.cvar[j] > 0
                     push!(cc, j)
                     push!(cvar, nlp.meta.cvar[j])

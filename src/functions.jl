@@ -74,19 +74,13 @@ end
 function minus_proj_lgL!(p, P::PROBLEM, W::WORK, l)
     @inbounds for i in 1:P.n
         diff = W.x[i] - l * W.gL[i]
-        if P.xl[i] <= diff
-            if diff <= P.xu[i]
-                p[i] = -l * W.gL[i]
-            else
-                p[i] = P.xu[i] - W.x[i]
-            end
-        else
-            p[i] = P.xl[i] - W.x[i]
-        end
+        p[i] = ifelse(P.xl[i] <= diff,
+            ifelse(diff <= P.xu[i], -l * W.gL[i], P.xu[i] - W.x[i]),
+            P.xl[i] - W.x[i]
+        )
     end
     @inbounds for i in (P.n + 1):(P.n + P.ncc)
-        diff = W.x[i] - l * W.gL[i]
-        p[i] = (diff >= 0.0) ? -l * W.gL[i] : -W.x[i]
+        p[i] = -min(l * W.gL[i], W.x[i])
     end
     return
 end
@@ -107,7 +101,7 @@ function compute_opt(P::PROBLEM, W::WORK, epsfeas, nor; delta = 1e-6)
                         max(0.0, W.Lwork[a]),
                         max(0.0, W.Lwork[b]),
                         min(abs(W.Lwork[a]), abs(W.Lwork[b]))
-                        )
+                    )
                 else
                     # x[a] = 0, x[b] > 0
                     W.Lwork[a] = 0.0

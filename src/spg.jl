@@ -181,11 +181,10 @@ function spg_ls(nlp, P::PROBLEM, W::WORK, par::EXTRA_PAR, L, pgL_norm)
             tquad = -0.5 * ( gLtd * (t^2) / (Lnew - L - t * gLtd) )
 
             # backtracking
-            if (tquad < par.sigma1) || (tquad > par.sigma2 * t)
-                t *= par.t_redfac
-            else
-                t = tquad
-            end
+            t = ifelse((tquad < par.sigma1) || (tquad > par.sigma2 * t),
+                t * par.t_redfac,
+                tquad
+            )
         end
 
         # new trial

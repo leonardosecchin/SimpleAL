@@ -90,10 +90,6 @@ function consec_range(v::Vector{Int64})
         return v
     else
         sort!(v)
-        if v[end] - v[1] + 1 == length(v)
-            return v[1]:v[end]
-        else
-            return v
-        end
+        return ifelse(v[end] - v[1] + 1 == length(v), v[1]:v[end], v)
     end
 end
