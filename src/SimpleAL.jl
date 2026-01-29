@@ -33,6 +33,7 @@ modified by setting `par.PARAMETER` to the desired value.
 - `fmin`: threshold to declare problem unlimited
 - `scale`: scale problem data before solving it?
 - `wmin`: minimum scale factor
+- `delta`: tolerance for declaring a complementary constraint equal to zero
 
 ## SPG/NPG/Line search parameters
 - `eta`: Armijo's constant
@@ -41,7 +42,7 @@ modified by setting `par.PARAMETER` to the desired value.
 - `t_redfac`: backtracking reduction factor (SPG)
 - `sigma1`: minimum steplength to employ quadratic interpolation (SPG)
 - `sigma2`: maximum factor to employ quadratic interpolation (SPG)
-- `r_incfac`: backtracking reduction factor (NPG)
+- `r_incfac`: backtracking increase factor (NPG)
 - `lmin`: minimum allowable spectral steplength
 - `lmax`: maximum allowable spectral steplength
 - `epsnoprogf`: tolerance to declare a reduction in the objective
@@ -58,6 +59,7 @@ function std_extra_par()
         1e-8,       # rhoinimin
         1e+8,       # rhoinimax
         -1e+20,     # fmin
+        1e-6,       # delta
         # SPG parameters:
         1e-4,       # eta
         10,         # lsm
@@ -271,7 +273,7 @@ is maintained in the subproblems are employed.
 - `epsfeas`: tolerance for feasibility (default = 1e-5)
 - `maxit`: maximum number of outer iterations (default = 100)
 - `verbose`: level of output information (0 to 2) (default = 1)
-- `extra_par`: additional parameters, see help for `std_extra_par`
+- `extra_par`: additional parameters, see the `std_extra_par` help
 """
 function al(
     nlp;
@@ -413,7 +415,7 @@ function al(
         # objective, constraints, gL and pgL at new x were computed by spg
 
         # scaled optimality
-        opt = compute_opt(P, W, epsfeas, Inf)
+        opt = compute_opt(P, W, epsfeas, Inf, delta = extra_par.delta)
 
         # estimate multipliers
         @. W.lam += W.rho * W.c

@@ -97,10 +97,10 @@ function compute_opt(P::PROBLEM, W::WORK, epsfeas, nor; delta = 1e-6)
             if (W.x[a] <= delta)
                 if (W.x[b] <= delta)
                     # x[a] = x[b] = 0
-                    W.Lwork[a] = W.Lwork[b] = max(
-                        max(0.0, W.Lwork[a]),
-                        max(0.0, W.Lwork[b]),
-                        min(abs(W.Lwork[a]), abs(W.Lwork[b]))
+                    W.Lwork[a] = W.Lwork[b] = min(
+                        abs(W.Lwork[a]),
+                        abs(W.Lwork[b]),
+                        max(max(0.0, W.Lwork[a]), max(0.0, W.Lwork[b]))
                     )
                 else
                     # x[a] = 0, x[b] > 0

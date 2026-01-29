@@ -67,6 +67,7 @@ mutable struct EXTRA_PAR
     rhoinimin::Float64
     rhoinimax::Float64
     fmin::Float64
+    delta::Float64
     # SPG/NPG parameters:
     eta::Float64
     lsm::Int64
