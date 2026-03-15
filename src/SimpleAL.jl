@@ -311,8 +311,7 @@ function al(
     opt = compute_opt(P, W, epsfeas, Inf)
 
     # tolerance for the subproblem
-#     epsoptk = epsopt
-    epsoptk = 0.1
+    epsoptk = epsopt
 
     iter = 0
     status = -1
@@ -404,9 +403,8 @@ function al(
 
         # set tolerance for the subproblem
         if (iter > 1) && (infeas_compl <= sqrt(epsfeas)) && (opt <= sqrt(epsopt))
-#             epsoptk = min(extra_par.tau * opt, 1e-1 * epsoptk)
-#             epsoptk = max(epsoptk, 1e-1 * epsopt)
-            epsoptk = max(0.1*epsoptk, epsopt)
+            epsoptk = min(extra_par.tau * opt, 1e-1 * epsoptk)
+            epsoptk = max(epsoptk, 1e-1 * epsopt)
         end
 
         spg_iter, spg_st = spg(nlp, P, W, extra_par, epsoptk, epsfeas, verbose)
