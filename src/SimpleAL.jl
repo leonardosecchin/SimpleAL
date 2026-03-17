@@ -156,7 +156,7 @@ function initialize(nlp, extra_par::EXTRA_PAR, x0)
             @inbounds @views W.x[1:n] .= nlp.meta.x0
         end
     else
-        W.x[1:n] = deepcopy(Float64.(x0))
+        W.x[1:n] .= Float64.(x0[1:n])
     end
 
     # project the starting point
