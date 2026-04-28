@@ -6,7 +6,7 @@ This is a simple Julia implementation of the safeguarded augmented Lagrangian me
 
 ## Installation
 
-`]add https://github.com/leonardosecchin/SimpleAL.git`
+`]add https://github.com/leonardosecchin/SimpleAL`
 
 ## Examples of use
 
